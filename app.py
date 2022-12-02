@@ -1,5 +1,12 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, request, send_file, session, url_for
 import pickle 
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib
+from matplotlib.figure import Figure
+import io
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 app = Flask(__name__)
 model = pickle.load(open('model.pkl','rb')) #read mode
 @app.route("/")
@@ -44,6 +51,25 @@ def predict():
             output = 'Yes'
         if output == 0:
             output = 'No'
+            
         return render_template("index.html", prediction_text='Your predicted campaign optin status  is  {}'.format(output))
+@app.route('/visualize')
+def visualize():
+    matplotlib.pyplot.switch_backend('Agg')
+
+    fig,ax=plt.subplots(figsize=(6,6))
+    ax=sns.set(style="darkgrid")
+
+    x=[i for i in range(100)]
+    y=[i for i in range(100)]
+
+    sns.lineplot(x,y)
+    canvas=FigureCanvas(fig)
+    img = io.BytesIO()
+    fig.savefig(img)
+    img.seek(0)
+
+    return send_file(img,mimetype='img/png')
+
 if __name__ == "__main__":
     app.run(debug=True)
