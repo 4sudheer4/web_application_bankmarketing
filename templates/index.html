@@ -18,7 +18,7 @@
 
      <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('predict')}}"method="post">
-    	<input type="text" name="age" placeholder="Experience" required="required" />
+    	<input type="text" name="age" placeholder="age" required="required" />
         <br>
         <label for="job">job:  </label>
         <select id="job" name="job", placeholder="job", required="required">
@@ -111,19 +111,13 @@
 
         <input type="text" name="cons_conf_idx" placeholder="cons_conf_idx" required="required" />
 
-        <button type="submit" class="btn btn-primary btn-block btn-large">predi</button>
+        <button type="submit" class="btn btn-primary btn-block btn-large">predict</button>
 
       </form>
 
 
    <br>
    <br>
-   {{ prediction_text }}
-   {{ prediction_text_1 }}
-   
-   <img src="{{ url_for('visualize') }}">
-
- </div>
 
 
 </body>

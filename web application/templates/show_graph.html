@@ -1,0 +1,44 @@
+<h1>BankMarketing</h1>
+
+<b>{{ prediction_text }}</b>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    .row {
+      display: flex;
+    }
+    
+    /* Create three equal columns that sits next to each other */
+    .column {
+      flex: 23.33%;
+      padding: 5px;
+    }
+    </style>
+    </head>
+
+
+</div>
+
+<div>
+    <h3>Visualizing</h3> 
+    <p> Explaining the graphs below: The first one displays where the given data on age over duration lies. The second graph displays a joint plot on all the datapoints displaying the trend </p>
+    <p> age and duration are one of the major features impacting the customer's interest to subscribe to a bank policy</p>
+    <p>With the help of these two graphs we'll understand where the given candiate stands and whether if time spent explaining the npolicy should be increased or not.</p>
+  </div>
+<div class="row">
+    <div class="column">
+      <img id="image" src="{{ url_for('visualize') }}"
+      alt="GFG image" style="width:100%" width="500" 
+      height="600">
+    </div>
+    <div class="column">
+      <img src="{{url_for('static', filename='age_duration.jpeg')}}" alt="Forest" style="width:100%" width="500" 
+      height="600">
+    </div>
+  </div>
+
