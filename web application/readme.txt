@@ -6,6 +6,8 @@ We have deployed RandomForest model on to the web application using Flask interf
 
 With the provided input values in a web form, the values are passed on to the model stored as pickle and trained to display the output on the web application.
 
+Firstly, we have stored our model, Scalar() object (for preprocessing), and the dataframe to the disk as pickle.
+
 Following is the Flask app.py setup:
 
 #loading the model

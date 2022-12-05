@@ -15,8 +15,6 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-#loading the model
-model = pickle.load(open('model.pkl','rb')) #read mode
 
 #calling the main html page to input the feature values
 @app.route("/")
@@ -54,9 +52,13 @@ def predict():
         #get data into a list for prediction
         input_cols = [[age, job, marital, education, default, housing, loan,contact, month, day, duration, campaign, poutcome, cons_price_idx, cons_conf_idx]]
         
-        #loading scalar object to scale the given data 
+        #loading scalar object to scale the given data
 
-        with open('scale.pkl','rb') as file:
+        with open('model1.pkl','rb') as file:
+            model = pickle.load(file)
+
+
+        with open('scale1.pkl','rb') as file:
             scalar = pickle.load(file)
 
         #loading the dataframe to plot
@@ -67,9 +69,8 @@ def predict():
 
         #performing the scalar operation on the given input record
         test_record = scalar.transform(input_cols)
-
         #predicting the given preprocessed data on model
-        prediction = model.predict(input_cols)
+        prediction = model.predict(test_record)
 
         #storing the prediction
         output = round(prediction[0], 2)
